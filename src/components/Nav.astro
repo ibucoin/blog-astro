@@ -1,0 +1,45 @@
+---
+import { SITE } from '../config';
+
+/** Main menu items */
+const textLinks: { label: string; href: string }[] = [
+	{ label: '首页', href: '/' },
+	{ label: '博客', href: '/posts/' },
+	{ label: '标签', href: '/tags/' },
+	{ label: '关于', href: '/about/' },
+    {label:'联系我',href:'/contact/'},
+];
+---
+
+<nav class="container mx-auto text-xs flex flex-wrap items-stretch min-h-32">
+    <div class="w-[20%] flex-row justify-start items-center flex">
+        <a href="/" class="text-4xl font-bold leading-7">
+            {SITE.title}
+        </a>
+    </div>
+	
+    <ul class="flex items-center justify-center mx-auto">
+        {
+            textLinks.map(({ label, href }) => (
+                <li>
+                    <a class:list={[
+                        'px-2 py-4 h-full font-bold text-base hover:text-primary',
+                        {
+                            active: Astro.url.pathname === href ||(href !== '/' && Astro.url.pathname.startsWith(href)), 
+                        }
+                    ]} href={href}>{label}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <div class="flex items-center justify-center w-[20%] gap-4">
+        <a href="https://twitter.com/ibucoin" class="cursor-pointer">
+            <span class="icon-[ri--twitter-x-fill] h-6 w-6"></span>
+        </a>
+        <a href="https://twitter.com/ibucoin" class="cursor-pointer">
+            <span class="icon-[mdi--github-box] h-6 w-6"></span>
+        </a>
+    </div>
+</nav>
+

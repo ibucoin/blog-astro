@@ -1,0 +1,22 @@
+.card {
+    box-shadow: #FDECE0 10px 10px 0px 0px;
+    border: 2px solid var(--lotta-border-border-initial-color);
+    --lotta-border-initial-color: #FAE3D3;
+    --lotta-border-border-initial-color: #FAE3D3;
+    border-radius: 4px 4px 4px 4px;
+    text-align: left;
+    justify-content: flex-start;
+
+    .card-content {
+        padding: 24px;
+        .tag {
+            @apply bg-primary text-white inline-block p-1 rounded text-sm font-bold;
+        }
+
+    }
+}
+
+.divider {
+    border-bottom: 1px solid #FAE3D3; 
+    margin: 12px 0;
+}

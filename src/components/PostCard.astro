@@ -1,0 +1,44 @@
+---
+import { Debug } from 'astro:components';
+
+
+const {post} = Astro.props;
+
+function formatDate(date: Date) {
+  return new Date(date).toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+<div class="w-[30%] card">
+    <article class="w-full">
+        <a class="h-[240px] block">
+            <img width="450" height="1024" class="h-full object-cover object-center transition duration-500 ease-in-out w-full " src="https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-450x1024.jpg" class="w-full h-full wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-450x1024.jpg 450w, https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-132x300.jpg 132w, https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23.jpg 562w" sizes="(max-width: 450px) 100vw, 450px"></a>
+        <div class="card-content">
+            <div class="tag cursor-pointer">
+                Blog
+            </div>
+            <div>
+                <h2 class="my-4">
+                    <a href={`/posts/${post.slug}`}>
+                        {post.data.title}
+                    </a>
+                </h2>
+                
+            </div>
+            <div class="line-clamp-2">
+              {post.data.description} 
+            </div>
+            <div class="divider">
+            </div>
+            <div class="flex gap-2 items-center my-4 text-sm">
+                <span class="icon-[mingcute--quill-pen-fill]"></span>
+                <span class="mr-4">ibucoin</span>
+                <span class="icon-[material-symbols--date-range]"></span>
+                <span>{formatDate(post.data.pubDatetime)} </span>
+            </div>
+        </div>
+    </article>
+</div>

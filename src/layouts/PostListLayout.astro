@@ -1,0 +1,45 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from './BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+
+interface Props {
+  page: Page<CollectionEntry<"posts">> | undefined;
+  title: string;
+  description?: string;
+}
+
+const { page, title, description } = Astro.props;
+
+if (!page) {
+  throw new Error("No page data provided");
+}
+---
+
+
+<BaseLayout
+	title={title + ' | '}
+	description={description}
+>
+	<div class="stack gap-20">
+		<main class="stack gap-8 w-full">
+        <PostList posts={page.data} />
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+  .disabled {
+    @apply pointer-events-none select-none opacity-50
+  }
+  svg {
+    dark:text-white
+  }
+  .list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+</style>

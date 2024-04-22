@@ -1,0 +1,84 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } =
+  post.data;
+
+const { Content, headings } = await post.render();
+
+const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
+  .href;
+
+function formatDate(date: Date) {
+  return new Date(date).toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout
+  title={title}
+  author={author}
+  description={description}
+  ogImage={ogUrl}
+  canonicalURL={canonicalURL}
+>
+  <div class="stack gap-20">
+    <div class="stack gap-15">
+      <div id="article" role="article" class="container mx-auto py-6">
+        <div class="max-w-full flex-grow">
+          <div class="mx-auto w-[80%]">
+            <div class="text-center mb-8">
+              <h1 class="text-center">
+                {post.data.title}
+              </h1>
+              <div class="flex gap-2 items-center my-4 text-sm justify-center">
+                <span class="icon-[mingcute--quill-pen-fill]"></span>
+                <span class="mr-4">ibucoin</span>
+                <span class="icon-[material-symbols--date-range]"></span>
+                <span>{formatDate(post.data.pubDatetime)} </span>
+              </div>
+            </div>
+            <article class="w-[80%] mx-auto blog-content">
+              <Content />
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global lang="scss">
+  .blog-content {
+	color: #212a33;
+	
+    h3 {
+      @apply text-2xl my-8;
+    }
+
+    p {
+		@apply mb-5 text-xl;
+
+    }
+  }
+</style>

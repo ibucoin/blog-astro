@@ -1,13 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry,getCollection } from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from "../components/Hero.astro"
 import LastestPost from "../components/LatestPost.astro"
 
-const allPosts = await getCollection("posts");
-const sortedPosts = allPosts.sort((a, b) => {
-  return new Date(b.data.pubDatetime) - new Date(a.data.pubDatetime);
+interface Props {
+	posts: CollectionEntry<'posts'>[];
+}
+
+const posts = await getCollection("posts");
+
+
+const sortedPosts = posts.sort((a, b) => {
+	let left = new Date(b?.data?.pubDatetime).getTime() ?? 0
+	let right =  new Date(a?.data?.pubDatetime).getTime() ?? 0
+
+	return left - right
 });
 
 const latestPosts = sortedPosts.slice(0, 2);

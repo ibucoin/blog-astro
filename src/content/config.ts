@@ -7,7 +7,6 @@ const posts = defineCollection({
       author: z.string().default("liruifengv"),
       pubDatetime: z.date(),
       title: z.string(),
-      excerpt:z.string(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
       tags: z.array(z.string()).default(["others"]),

@@ -1,0 +1,18 @@
+---
+import PostCard from "./PostCard.astro";
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+	posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+---
+<div class="flex justify-center container">
+    <div class="w-full flex flex-wrap gap-12">
+      {
+        posts.map((post) => (
+           <PostCard post={post}></PostCard>
+        ))
+      }
+    </div>
+  </div>

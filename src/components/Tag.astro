@@ -13,22 +13,9 @@ const { name, count } = Astro.props;
   class={`text-base pr-4 group`}
 >
   <span>
-    <span class="tag">{name.toLowerCase()}{count && count > 0 && `(${count})`}</span>
+    <span class="text-white bg-primary p-2 text-center min-w-20 mb-2 whitespace-nowrap text-sm inline-block rounded-lg">{name.toLowerCase()}{count && count > 0 && `(${count})`}</span>
   </span>
 </a>
 
 <style>
-	.tag {
-		padding: 0.5rem 1rem;
-		color: var(--accent-text-over);
-		border: 1px solid var(--accent-regular);
-		background-color: var(--accent-regular);
-		border-radius: 999rem;
-		font-size: var(--text-md);
-		white-space: nowrap;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    min-width: 5rem;
-    text-align: center;
-	}
 </style>

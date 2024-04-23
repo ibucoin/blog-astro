@@ -2,11 +2,22 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from "../components/Hero.astro"
+import LastestPost from "../components/LatestPost.astro"
 
+const allPosts = await getCollection("posts");
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.data.pubDatetime) - new Date(a.data.pubDatetime);
+});
+
+const latestPosts = sortedPosts.slice(0, 2);
 ---
 
 <BaseLayout>
 	<div class="container mx-auto">
-		just type the collection
+		<Hero>
+			人终究会死，人生只是一个追求人生意义的过程。
+		</Hero>
+		<LastestPost posts={latestPosts}></LastestPost>
 	</div>
 </BaseLayout>

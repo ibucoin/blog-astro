@@ -1,7 +1,4 @@
 ---
-import { Debug } from 'astro:components';
-
-
 const {post} = Astro.props;
 
 function formatDate(date: Date) {
@@ -11,15 +8,24 @@ function formatDate(date: Date) {
     day: 'numeric',
   });
 }
+let ogImage = post.data.ogImage
+const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
+  .href;
 ---
 <div class="w-[30%] card">
     <article class="w-full">
         <a class="h-[240px] block">
-            <img width="450" height="1024" class="h-full object-cover object-center transition duration-500 ease-in-out w-full " src="https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-450x1024.jpg" class="w-full h-full wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-450x1024.jpg 450w, https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23-132x300.jpg 132w, https://imwsl.com/wp-content/uploads/2024/03/photo_2024-03-10_21-51-23.jpg 562w" sizes="(max-width: 450px) 100vw, 450px"></a>
+            <img width="450" height="1024" class="h-full object-cover object-center transition duration-500 ease-in-out w-full " src={ogUrl} class="w-full h-full wp-post-image" alt="" decoding="async" fetchpriority="high"></a>
         <div class="card-content">
-            <div class="tag cursor-pointer">
-                Blog
+            {
+                post.data.tags.map((tag:string) => (
+                <div class="tag cursor-pointer">
+                {tag}
             </div>
+                ))
+            }
+           
             <div>
                 <h2 class="my-4">
                     <a href={`/posts/${post.slug}`}>

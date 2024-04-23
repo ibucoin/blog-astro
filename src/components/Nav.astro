@@ -7,7 +7,7 @@ const textLinks: { label: string; href: string }[] = [
 	{ label: '博客', href: '/posts/' },
 	{ label: '标签', href: '/tags/' },
 	{ label: '关于', href: '/about/' },
-    {label:'联系我',href:'/contact/'},
+    // {label:'联系我',href:'/contact/'},
 ];
 ---
 
@@ -42,4 +42,10 @@ const textLinks: { label: string; href: string }[] = [
         </a>
     </div>
 </nav>
+
+<style>
+    .active {
+        @apply text-primary;
+    }
+</style>
 

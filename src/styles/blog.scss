@@ -10,7 +10,7 @@
     .card-content {
         padding: 24px;
         .tag {
-            @apply bg-primary text-white inline-block p-1 rounded text-sm font-bold;
+            @apply bg-primary text-white inline-block p-1 rounded text-sm font-bold mr-2;
         }
 
     }

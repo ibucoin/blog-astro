@@ -4,6 +4,7 @@ import { type CollectionEntry,getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from "../components/Hero.astro"
 import LastestPost from "../components/LatestPost.astro"
+import getSortedPosts from "../utils/getSortedPosts" 
 
 interface Props {
 	posts: CollectionEntry<'posts'>[];
@@ -12,14 +13,8 @@ interface Props {
 const posts = await getCollection("posts");
 
 
-const sortedPosts = posts.sort((a, b) => {
-	let left = new Date(b?.data?.pubDatetime).getTime() ?? 0
-	let right =  new Date(a?.data?.pubDatetime).getTime() ?? 0
-
-	return left - right
-});
-
-const latestPosts = sortedPosts.slice(0, 2);
+const sortedPosts = getSortedPosts(posts);
+const latestPosts = sortedPosts.slice(0, 6);
 ---
 
 <BaseLayout>
@@ -27,6 +22,11 @@ const latestPosts = sortedPosts.slice(0, 2);
 		<Hero>
 			人终究会死，人生只是一个追求人生意义的过程。
 		</Hero>
+		<div class="heading-title">
+			<h3>
+				Latest Posts
+			</h3>
+		</div>
 		<LastestPost posts={latestPosts}></LastestPost>
 	</div>
 </BaseLayout>

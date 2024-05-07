@@ -20,3 +20,22 @@
     border-bottom: 1px solid #FAE3D3; 
     margin: 12px 0;
 }
+
+.heading-title {
+    display: flex;
+    text-align: center;
+
+    background-image: url(https://imwsl.com/wp-content/themes/yuki-elegant/assets/images/sub-heading-background.png);
+    background-position: 50% 50%;
+    box-shadow: none;
+    border: none;
+    background-repeat: no-repeat;
+    margin: 48px 0;
+    justify-content: center;
+
+    h3 {
+       font-size: 1.75rem;
+       line-height: 1.5;
+    }
+
+}

@@ -7,7 +7,7 @@ featured: false
 draft: false
 ogImage: "https://plus.unsplash.com/premium_photo-1665329006985-04f95dd59402?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 tags:
-  - test
+  - life
 ---
 
 在astro布道师[**liruifeng**](liruifengv.com)的布道下，我用了2天的时间尝试着把自己以前的hugo博客转换成了astro，而现在的这个网站就是我之前的成果
